@@ -24,7 +24,6 @@ var SLIDE_CONFIG = {
   presenters: [{
     name: 'Nick Stinemates',
     company: 'Technical Alliances<br>doutCloud / Docker',
-    gplus: 'http://plus.google.com/1234567890',
     twitter: '@nickstinemates',
     www: 'http://nick.stinemat.es',
     github: 'http://github.com/keeb'

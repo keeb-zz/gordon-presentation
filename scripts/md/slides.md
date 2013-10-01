@@ -43,18 +43,28 @@ bd156f00e4cb        busybox:latest      echo hello, world   4 days ago          
 
 ---
 title: Images vs. Containers
-content_class: flexbox vcenter
 
 # docker run busybox cat /etc/passwd
+<pre class="prettyprint">
+root:x:0:0:root:/root:/bin/zsh
+daemon:x:1:1:daemon:/usr/sbin:/bin/sh
+</pre>
 
-Not so interesting..
+
+---
+title: Images vs. Containers
 
 # docker run busybox rm /etc/passwd
 
-Oh!
+---
+title: Images vs. Containers
+
 # docker run busybox cat /etc/passwd
 
-What will happen?
+<pre class="prettyprint">
+root:x:0:0:root:/root:/bin/zsh
+daemon:x:1:1:daemon:/usr/sbin:/bin/sh
+</pre>
 
 ---
 title: Why?
@@ -63,11 +73,18 @@ title: Why?
 
 
 ---
-
 title: Creating images
 
-# docker run .. docker commit
-
+<pre class="prettyprint">
+>> ~ ID=$(docker run -d busybox rm /etc/passwd)
+>> ~ echo $ID
+3d85ec
+>> ~ IMAGE=$(docker commit $ID keeb/broken-busybox)
+>> ~ echo $IMAGE
+f29b82
+>> ~ docker run $IMAGE cat /etc/passwd
+cat: can't open '/etc/passwd': No such file or directory
+</pre>
 
 ---
 
@@ -93,11 +110,12 @@ cmd ["python", "website/web/server.py"]
 
 title: Gordon
 
-Gordon is the dotCloud Robot
+Gordon is a multi-function robot providing a presence via the Web and IRC, while exposing a rich API. If you're contributing to Docker, his goal is to make your life AWESOME.
+
+If you're interested in how non-trivial projects can be built, tested, distributed, or run via Docker, Gordon's goal is to provide a reference which adheres to the best practices developed by the community in these areas.
 
 ---
-
-title: Gordon
+title: He's also our mascot
 class: image
 
 ![Gordon](images/gordon.jpg)
@@ -165,69 +183,42 @@ redis-cli -h $REDIS_HOST -p $REDIS_PORT rpush frontend:$GORDON_DOMAIN http://$AP
 ---
 title: Let's run it..
 
----
-
-
-## docker ps
-It's running..
-
----
-
-
-## Let's make a change.
-.. make a minor change.
+# docker ps
+<pre class="prettyprint">
+ID                  IMAGE                                     COMMAND                CREATED              STATUS              PORTS
+40a1120da12a        registry.stinemat.es/keeb/gordon:latest   python website/web/s   About a minute ago   Up About a minute   49154->5000           
+3867b55507b7        keeb/hipache:latest                       supervisord -n         About a minute ago   Up About a minute   49153->6379, 80->80   
+</pre>
 
 ---
-
-
-## Let's build it!
-docker build -t ..
+title: Let's make a change
 
 ---
-
-
-## Let's test it!
-Run start script
+title: Now build it..
 
 ---
+title: Then test it..
 
 
-## OK, let's deploy it.
-docker push ...
-
----
-
-
-## OK, let's run it in prod
-ssh to prod (linode)
-docker pull changes
-explain how that happens again..
 
 ---
-
-
-## run start script.
+title: Then deploy it..
 
 ---
-
-
-## Oh, we want to run it somewhere else?
-ssh to digitalocean
-docker pull
+title: How about prod deployment?
 
 ---
-
-
-## run script..
+title: How about multi-cloud deployment?
 
 ---
+title: How about an OpenStack deployment?
 
-
+---
 title:Questions?
 
 ---
+class: image
+![Docker Log](images/docker-logo.jpg)
 
-
-title:Docker Logo
 
 
